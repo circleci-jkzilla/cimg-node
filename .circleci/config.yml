@@ -1,8 +1,32 @@
-version 2.1
+version: 2.1
 
 orbs: 
   continuation: circleci/continuation@0.3.1
 
 jobs:
   build-if-changed:
-    docker: cimg/base:2022.06
+    docker: 
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - checkout 
+      - path-filtering/filter:
+          base-revision: main
+          config-path: .circleci/continue-config.yml
+          mapping: |
+            12.13 build-image true
+            14.19 build-image true
+            16.12 build-image true
+            16.14 build-image true
+            16.15 build-image true
+            16.16 build-image true
+            17.5 build-image true
+            17.6 build-image true
+            17.7 build-image true
+            17.8 build-image true
+            17.9 build-image true
+            18.0 build-image true
+            18.1 build-image true
+            18.2 build-image true
+            18.3 build-image true
+            18.4 build-image true
