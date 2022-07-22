@@ -3,13 +3,14 @@ version: 2.1
 orbs: 
   path-filtering: circleci/path-filtering@0.1.3
 
-jobs:
-  build-if-changed:
-    docker: 
-      - image: cimg/base:current
-    resource_class: small
-    steps:
-      - checkout 
+parameters:
+  build-image:
+    type: boolean
+    default: true
+
+workflows:
+  main:
+    jobs: 
       - path-filtering/filter:
           base-revision: main
           config-path: .circleci/continue-config.yml
@@ -30,8 +31,3 @@ jobs:
             18.2 build-image true
             18.3 build-image true
             18.4 build-image true
-
-workflows:
-  main:
-    jobs: 
-      - build-if-changed
