@@ -30,3 +30,8 @@ jobs:
             18.2 build-image true
             18.3 build-image true
             18.4 build-image true
+
+workflows:
+  main:
+    jobs: 
+      - build-if-changed
